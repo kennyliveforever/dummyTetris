@@ -1,0 +1,116 @@
+.main {
+    /*position: relative;*/
+    display: grid;
+    grid-template-rows: repeat(45, 16px);
+    grid-template-columns: repeat(30, 16px);
+    grid-gap: 2px;
+    width: 538px;
+    background: lightgray;
+    border: inset 2px black;
+    padding: 2px;
+    /*overflow: hidden;*/
+}
+
+.cell {
+    position: relative;
+    width: 12px;
+    height: 12px;
+    border: solid 2px gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.5;
+    z-index: 1;
+}
+
+.cell::after {
+    display: inline-block;
+    content: "";
+    width: 8px;
+    height: 8px;
+    background: gray;
+}
+
+.figure {
+    /*margin: 2px;*/
+    position: relative;
+    display: grid;
+    flex-wrap: wrap-reverse;
+    /*top: 24px;*/
+    gap: 2px;
+    z-index: 2;
+    /*grid-template-rows: 1fr 1fr;*/
+    /*grid-template-columns: 1fr 1fr 1fr;*/
+    /*grid-column-start: 5;*/
+    /*grid-column-end: 9;*/
+    grid-row-start: 1;
+    /*grid-row-end: 1;*/
+}
+
+.figure-cell {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border: solid 2px black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    /*margin: 2px;*/
+}
+
+.figure-cell::after {
+    display: inline-block;
+    content: "";
+    width: 8px;
+    height: 8px;
+    background: black;
+}
+
+.figure2 {
+    position: relative;
+    display: flex;
+    gap: 2px;
+    /*grid-template-columns: 1fr 1fr;*/
+    /*grid-template-rows: 1fr 1fr;*/
+    grid-column-start: 1;
+    grid-column-end: 31;
+    grid-row-start: 45;
+    grid-row-end: 45;
+}
+
+.figure-cell2 {
+    background: aquamarine;
+    width: 16px;
+    height: 16px;
+}
+
+
+#1 {
+    grid-row-start: 1;
+    grid-row-end: 1;
+    grid-column-start: 1;
+    grid-column-end: 1;
+    background: aquamarine;
+    z-index: 2;
+}
+
+#2 {
+    width: 12px;
+    height: 12px;
+    grid-row-start: 2;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 1;
+    background: aquamarine;
+}
+
+#3 {
+    width: 12px;
+    height: 12px;
+    grid-row-start: 2;
+    grid-row-end: 2;
+    grid-column-start: 2;
+    grid-column-end: 2;
+    background: aquamarine;
+}
