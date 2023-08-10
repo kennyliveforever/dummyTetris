@@ -1,100 +1,5 @@
 let main = document.querySelector('.main')
 
-let pseudoCell = document.createElement('div')
-pseudoCell.className = 'figure-cell'
-pseudoCell.setAttribute('row', 'row')
-
-// class Test {
-//     constructor() {
-//         this.cell0 = document.createElement('div')
-//         this.cell1 = document.createElement('div')
-//         this.cell2 = document.createElement('div')
-//         this.cell3 = document.createElement('div')
-//     }
-//
-//     set cellRow(value) {
-//         this.cell0.setAttribute('row', `${value[0]}`)
-//         this.cell1.setAttribute('row', `${value[1]}`)
-//         this.cell2.setAttribute('row', `${value[2]}`)
-//         this.cell3.setAttribute('row', `${value[3]}`)
-//     }
-//
-//     get currentPositionX() {
-//         return +this.elem.style.gridRowEnd
-//     }
-//
-//     get posY() {
-//         return [+this.elem.style.gridColumnStart, +this.elem.style.gridColumnEnd]
-//     }
-//
-//     get nextPos () {
-//         if (this.isRotate == 0) {
-//             return matrix[this.currentPositionX].slice(this.posY[0] - 1, this.posY[1] - 1).includes(1)
-//         } else {
-//             return matrix[this.currentPositionX-1][this.posY[0] - 1] === 1
-//         }
-//     }
-//
-//     matrixFill() {
-//         if (this.isRotate == 0) {
-//             console.log('fill')
-//             matrix[this.currentPositionX-1].splice(+this.elem.style.gridColumnStart - 1, 4, 1, 1, 1, 1)
-//         } else if (this.isRotate == 90) {
-//             for (let i = 2; i < 6; i++) {
-//                 matrix[arr[index].currentPositionX-i].splice(+this.elem.style.gridColumnStart - 1, 1, 1)
-//             }
-//         }
-//     }
-//
-//     moveDown() {
-//         if (!this.nextPos) {
-//             this.elem.style.gridRowStart++
-//             this.elem.style.gridRowEnd++
-//         } else {
-//             this.isMove = false
-//             clearInterval(timer)
-//             this.matrixFill()
-//             this.setCellRow()
-//             fullRowHandler()
-//             index++
-//             init(index)
-//         }
-//     }
-//
-//     createFigure() {
-//         main.append(this.elem)
-//     }
-//
-//     rotate() {
-//         if (this.isRotate == 0) {
-//             this.isRotate = 90
-//             //this.style = ['18px', '0px']
-//             this.elem.style.flexDirection = 'column'
-//             this.elem.style.gridColumnEnd = `${+this.elem.style.gridColumnStart + this.height}`
-//             this.elem.style.gridRowEnd = `${+this.elem.style.gridRowStart + this._length}`
-//             //this.currentPositionX = +this.elem.style.gridRowEnd
-//         } else if (this.isRotate == 90) {
-//             this.isRotate = 0
-//             //this.style = ['0px', '18px']
-//             this.elem.style.flexDirection = 'row'
-//             this.elem.style.gridColumnEnd = `${+this.elem.style.gridColumnStart + this._length}`
-//             this.elem.style.gridRowEnd = `${+this.elem.style.gridRowStart}`
-//         }
-//     }
-//
-//     moveRight () {
-//         this.elem.style.gridColumnStart++
-//         this.elem.style.gridColumnEnd++
-//     }
-//
-//     moveLeft () {
-//         this.elem.style.gridColumnStart--
-//         this.elem.style.gridColumnEnd--
-//     }
-// }
-
-
-
 class Figure {
 
     constructor() {
@@ -600,7 +505,7 @@ let index = 0
 let timeout = 200
 
 function init(index) {
-    arr.push(new T())
+    arr.push(new Figure())
     //arr.push(new figures[Math.floor(Math.random() * figures.length)]())
     arr[index].isMove = true
     arr[index].createFigure()
