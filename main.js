@@ -9,6 +9,11 @@ let timeout = 150
 let pause = false
 let pauseBlink
 
+let sound = new Audio('./sound/blipSelect.wav')
+let sound2 = new Audio('./sound/powerUp.wav')
+let sound3 = new Audio('./sound/explosion.wav')
+
+
 let pauseElement = document.querySelector('.pause')
 
 let countElement = document.querySelector('.scoreCount')
@@ -112,9 +117,10 @@ class Figure {
             }
             main.append(document.createElement('div').textContent = 'GAME OVER')
         } else {
+            sound2.play()
+            this.isMove = false
             score += 10
             countElement.textContent = `${score}`
-            this.isMove = false
             clearInterval(timer)
             this.matrixFill()
             this.cellRowSet()
@@ -457,12 +463,6 @@ class T extends L {
         this.cell2.style.left = '0px'
     }
 
-    setCellRow() {
-        if (this.isRotate == 0) {
-            this.cellRow = [this.currentPositionX-2, this.currentPositionX-2 ,this.currentPositionX-2, this.currentPositionX-3]
-        }
-    }
-
     set style (value) {
         this.cell1.style.left = value[0]
         this.cell0.style.left = value[1]
@@ -527,9 +527,10 @@ class T extends L {
         }
     }
 
+    // Set current row for each cell in figure
     cellRowSet () {
         if (this.isRotate == 90) {
-            this.cellRow = [this.currentPositionX - 4, this.currentPositionX - 2, this.currentPositionX - 2, this.currentPositionX - 3]
+            this.cellRow = [this.currentPositionX - 4, this.currentPositionX - 3, this.currentPositionX - 2, this.currentPositionX - 3]
         } else if (this.isRotate == 180) {
             this.cellRow = [this.currentPositionX - 3, this.currentPositionX - 3, this.currentPositionX - 3, this.currentPositionX - 2]
         } else if (this.isRotate == 270) {
@@ -539,6 +540,7 @@ class T extends L {
         }
     }
 
+    // Get next left position of figure
     get nextLeft() {
         if (this.isRotate == 0) {
             return matrix[this.currentPositionX - 1][this.posY[0] - 2] ||
@@ -557,6 +559,7 @@ class T extends L {
         }
     }
 
+    // Get next right position of figure
     get nextRight() {
         if (this.isRotate == 0) {
             return matrix[this.currentPositionX - 1][this.posY[1] - 1] ||
@@ -666,13 +669,16 @@ class S extends T {
 }
 
 class S_reverse extends S {
-
+    //  2  0
     // [#][#]
     //    [#][#]
+    //     1  3
 
-    //    [#]
+    //     3
+    //  2 [#]
     // [#][#]
-    // [#]
+    // [#] 1
+    //  0
 
     constructor() {
         super()
@@ -710,7 +716,7 @@ class S_reverse extends S {
             this.elem.style.gridRowEnd = `${+this.elem.style.gridRowStart + this.length}`
         } else {
             this.isRotate = 0
-            this.style = ['0px', '36px', '18px', '0px', "18px"]
+            this.style = ['0px', '18px', '36px', '18px', "0px"]
             this.elem.style.flexDirection = 'row'
             this.elem.style.gridColumnEnd = `${+this.elem.style.gridColumnStart + this.length}`
             this.elem.style.gridRowEnd = `${+this.elem.style.gridRowStart + this.height}`
@@ -750,8 +756,9 @@ class S_reverse extends S {
 
 let figures = [Figure, T, L, S, S_reverse, L_reverse]
 
+// Start game
 function init(index) {
-    //arr.push(new S_reverse())
+    //arr.unshift(new S_reverse())
     arr.unshift(new figures[Math.floor(Math.random() * figures.length)]())
     arr[index].isMove = true
     arr[index].createFigure()
@@ -779,6 +786,7 @@ function handler(event) {
         timer = setInterval(() => arr[index].moveDown(),20)
     } else if (event.code == 'Space'  && !pause && !event.repeat) {
         arr[index].rotate()
+        sound.play()
     } else if (event.code == 'ArrowUp' && !event.repeat) {
         if (!pause) {
             pause = true
@@ -806,7 +814,7 @@ function handlerUp(event) {
     }
 }
 
-function fullRowHandler(callback) {
+function fullRowHandler() {
     let cells = document.getElementsByClassName('figure-cell')
     let fullRow = false
     for (let i of matrix) {
@@ -814,6 +822,7 @@ function fullRowHandler(callback) {
 
             score += 100
             countElement.textContent = `${score}`
+            sound3.play()
 
             for (let a of cells) {
                 if (a.getAttribute('row') == matrix.indexOf(i)) {
@@ -821,21 +830,22 @@ function fullRowHandler(callback) {
                     a.style.opacity = '0'
                     setTimeout(() => a.remove = 'none', 500)
                 } else if (a.getAttribute('row') < matrix.indexOf(i)) {
-                    setTimeout(() => {
-                        let row = a.getAttribute('row')
-                        let translate = +a.style.transform.substr(11, a.style.transform.length - 14)
-                        translate += 18
-                        row++
-                        a.style.transition = 'transform 500ms'
-                        a.style.transform = 'translateY(' + `${translate.toString()}` + 'px)'
-                        a.setAttribute('row', `${row}`)
-                    }, 500)
+                    let row = a.getAttribute('row')
+                    let translate = +a.style.transform.substr(11, a.style.transform.length - 14)
+                    translate += 18
+                    a.style.transition = 'transform 500ms'
+                    a.style.transform = 'translateY(' + `${translate.toString()}` + 'px)'
+                    row++
+                    a.setAttribute('row', `${row}`)
                 }
             }
 
             for (let b = matrix.indexOf(i); b > matrix.lastIndexOf(matrix[0]); b--) {
                 matrix[b] = matrix[b - 1]
             }
+
+            console.log(matrix)
+
         } else {
             fullRow = false
         }
@@ -859,6 +869,9 @@ function clear() {
 
 function restart () {
     clearInterval(timer)
+    clearInterval(pauseBlink)
+    pause = false
+    pauseElement.style.opacity = 0.1
     arr = []
     index = 0
     score = 0
