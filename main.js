@@ -22,8 +22,6 @@ countElement.textContent = `${score}`
 let levelElement = document.querySelector('.levelCount')
 levelElement.textContent = level
 
-
-
 class Figure {
 
     constructor() {
@@ -841,7 +839,7 @@ function fullRowHandler() {
                     let translate = +a.style.transform.substr(11, a.style.transform.length - 14)
                     translate += 22
                     a.style.transition = 'transform 500ms'
-                    a.style.transform = 'translateY(' + `${translate}` + 'px)'
+                    a.style.transform = 'translateY(' + `${translate.toString()}` + 'px)'
                     row++
                     a.setAttribute('row', `${row}`)
                 }
@@ -906,6 +904,10 @@ window.addEventListener('keydown',  handler)
 window.addEventListener('keyup',  handlerUp)
 
 var matrix = [
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
