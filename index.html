@@ -8,25 +8,30 @@
     <link href="fonts/DSEG7Classic-Italic.woff2">
 </head>
 <body>
-<div class="frame">
-    <div class="main">
-    </div>
-    <div class="score">
-        <div class="scoreLabel">SCORE</div>
-        <div class="scoreDigit">
-            <a class="scoreGhost">888888</a>
-            <a class="scoreCount"></a>
+<div class="container">
+    <div class="frame">
+        <div class="main">
+        </div>
+        <div class="panel">
+            <div class="score">
+                <div class="scoreLabel">SCORE</div>
+                <div class="scoreDigit">
+                    <a class="scoreGhost">888888</a>
+                    <a class="scoreCount"></a>
+                </div>
+            </div>
+            <div class="level">
+                <div class="levelLabel">LEVEL</div>
+                <a class="levelDigit">
+                    <a class="levelGhost">88</a>
+                    <a class="levelCount"></a>
+                </a>
+            </div>
+            <div class="pause">PAUSE</div>
+            <div class="restart" onclick="restart()">RESTART</div>
         </div>
     </div>
-    <div class="level">
-        <div class="levelLabel">LEVEL</div>
-        <a class="levelDigit">
-            <a class="levelGhost">88</a>
-            <a class="levelCount"></a>
-        </a>
-    </div>
-    <div class="pause">PAUSE</div>
-    <div class="restart" onclick="restart()">RESTART</div>
-    </div>
+</div>
+
 </body>
 </html>
