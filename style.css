@@ -183,7 +183,7 @@
 }
 
 .figure-cell {
-    /*position: absolute;*/
+    position: relative;
     width: auto;
     height: auto;
     outline: solid 2px black;
