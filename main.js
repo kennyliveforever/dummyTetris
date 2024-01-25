@@ -1,4 +1,8 @@
 let main = document.querySelector('.main')
+let ghostGrid = document.querySelector('.ghostGrid')
+let gameOver = document.querySelector('.gameOver')
+
+let gameIsOver = true
 
 let arr = []
 let timer
@@ -13,6 +17,7 @@ let sound = new Audio('./sound/blipSelect.wav')
 let sound2 = new Audio('./sound/powerUp.wav')
 let sound3 = new Audio('./sound/explosion.wav')
 
+let welcome = document.querySelector('.welcome')
 
 let pauseElement = document.querySelector('.pause')
 
@@ -21,6 +26,22 @@ countElement.textContent = `${score}`
 
 let levelElement = document.querySelector('.levelCount')
 levelElement.textContent = level
+
+let frame = document.querySelector('.frame')
+
+if (window.getComputedStyle(gameOver).display == 'none') {
+    gameIsOver = false
+}
+
+let start = document.querySelector('.start')
+
+start.addEventListener('click', () => init(index))
+
+for (let i = 0; i < 864; i++) {
+    let div = document.createElement("div")
+    div.className = 'cell'
+    ghostGrid.append(div)
+}
 
 
 // Main parental class
@@ -115,7 +136,7 @@ class Figure {
             for (let i of document.querySelectorAll('.figure')) {
                 i.remove()
             }
-            main.append(document.createElement('div').textContent = 'GAME OVER')
+            gameOver.style.display = 'block'
         } else {
             sound2.play()
             this.isMove = false
@@ -714,6 +735,8 @@ let figures = [Figure, T, L, S, S_reverse, L_reverse]
 
 // Start game
 function init(index) {
+    welcome.style.display = 'none'
+    frame.style.filter = 'none'
     // arr.unshift(new S_reverse())
     arr.unshift(new figures[Math.floor(Math.random() * figures.length)]())
     arr[index].isMove = true
@@ -743,7 +766,7 @@ function handler(event) {
         arr[index].rotate()
         sound.play()
     } else if (event.code == 'ArrowUp' && !event.repeat) {
-        if (!pause) {
+        if (!pause && gameIsOver == false) {
             pause = true
             clearInterval(timer)
             pauseBlink = setInterval(() => {
@@ -774,7 +797,7 @@ function fullRowHandler() {
     let cells = document.getElementsByClassName('figure-cell')
     let fullRow = false
     for (let i of matrix) {
-        if (matrix.indexOf(i) != matrix.length - 1 && i.toString() == matrix[matrix.length - 1].toString()) {
+        if (matrix.indexOf(i) !=  matrix.length - 1 && i.toString() == matrix[matrix.length - 1].toString()) {
             score += 100
             countElement.textContent = `${score}`
             sound3.play()
@@ -836,6 +859,7 @@ function restart () {
     levelElement.textContent = level
     timeout = 150
     pause = false
+    gameOver.style.display = 'none'
     let figures = document.querySelectorAll('.figure')
     for (let i = 0; i < figures.length; i++) {
         figures[i].remove()
@@ -847,9 +871,9 @@ function restart () {
     }
 }
 
-console.log(arr)
 
-document.addEventListener("DOMContentLoaded",() => init(index))
+
+// document.addEventListener("DOMContentLoaded",() => init(index))
 
 window.addEventListener('keydown',  handler)
 window.addEventListener('keyup',  handlerUp)

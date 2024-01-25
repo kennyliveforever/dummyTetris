@@ -16,8 +16,6 @@
     justify-content: center;
     position: relative;
     flex-grow: 0;
-    /*width: calc(538px + 10%);*/
-    width: 58vw;
     border: solid 2px black;
     background: lightgray;
     /*left: calc(50% - (538px + 10%)/2);*/
@@ -25,6 +23,7 @@
     height: 96vh;
     margin: 2px;
     /*padding-bottom: 4px;*/
+    filter: blur(4px);
 }
 
 .main {
@@ -46,28 +45,52 @@
 
 .panel {
     position: relative;
+    width: 150px;
     height: 100%;
     background: aquamarine;
     flex-grow: 1;
     border-left: solid black 2px;
 }
 
-.cell {
+.ghostGrid {
     position: absolute;
-    border: solid 2px gray;
+    top: 5px;
+    display: grid;
+    grid-template-rows: repeat(36, 1fr);
+    grid-template-columns: repeat(24, 1fr);
+    width: calc(95vh / 1.5);
+    left: 0px;
+    padding: 2px;
+    overflow: hidden;
+    height: 95vh;
+    bottom: -1%;
+    overflow: hidden;
+}
+
+.cell {
+    position: relative;
+    width: auto;
+    height: auto;
+    outline: solid 2px gray;
+    outline-offset: -2px;
     display: flex;
-    align-items: center;
     justify-content: center;
-    opacity: 0.5;
+    align-items: center;
     z-index: 1;
+    padding: 4px;
+    margin: 1px;
+    transform: translateY(0px);
+    transition: transform 500ms;
+    opacity: 0.1;
 }
 
 .cell::after {
     display: inline-block;
     content: "";
-    width: 90%;
-    height: 90%;
     background: gray;
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
 
 .score {
@@ -150,7 +173,6 @@
 .restart {
     position: absolute;
     bottom: 50px;
-    right: 50px;
     font-family: "Arial";
     font-size: 18px;
     border: solid black 2px;
@@ -172,7 +194,7 @@
     flex-wrap: wrap-reverse;
     /*top: 24px;*/
     gap: 2px;
-    z-index: 2;
+    z-index: 0;
     /*grid-template-rows: 1fr 1fr;*/
     /*grid-template-columns: 1fr 1fr 1fr;*/
     /*grid-column-start: 5;*/
@@ -208,4 +230,47 @@
     width: 100%;
     height: 100%;
     background: black;
+}
+
+.gameOver {
+    display: none;
+    position: absolute;
+    z-index: 2;
+    font-size: 24px;
+    align-self: center;
+}
+
+.welcome {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 0.7;
+    z-index: 4;
+
+}
+
+.field {
+    position: relative;
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    width: 50%;
+    height: 80%;
+    background: white;
+    z-index: 5;
+    border-radius: 15px;
+}
+
+.start {
+    position: relative;
+    width: fit-content;
+    font-size: 32px;
+    background: cornflowerblue;
+    padding: 10px;
+    border-radius: 15px;
+    margin: 10px;
 }
