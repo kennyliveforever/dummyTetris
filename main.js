@@ -274,6 +274,10 @@ class L extends Figure {
             this.style = ['1 / 1', '1 / 2', '2 / 1', '3 / 1']
             this.gridChanger(this.isRotate)
         } else if (this.isRotate == 90) {
+            if (this.elem.style.gridColumnEnd == 25) {
+                this.elem.style.gridColumnStart = '22'
+                this.elem.style.gridColumnEnd = '25'
+            }
             this.isRotate = 180
             this.style = ['1 / 1', '1 / 2', '1 / 3', '2 / 3']
             this.gridChanger(this.isRotate)
@@ -282,6 +286,10 @@ class L extends Figure {
             this.style = ['1 / 2', '2 / 2', '3 / 1', '3 / 2']
             this.gridChanger(this.isRotate)
         } else if (this.isRotate == 270) {
+            if (this.elem.style.gridColumnEnd == 25) {
+                this.elem.style.gridColumnStart = '22'
+                this.elem.style.gridColumnEnd = '25'
+            }
             this.isRotate = 0
             this.style = ['1 / 1', '2 / 1', '2 / 2', '2 / 3']
             this.gridChanger(this.isRotate)
@@ -300,7 +308,7 @@ class L extends Figure {
         }
     }
 
-        get nextLeft() {
+    get nextLeft() {
         if (this.isRotate == 0) {
             return matrix[this.currentPositionX - 1][this.posY[0] - 2] ||
                    matrix[this.currentPositionX - 2][this.posY[0] - 2]
@@ -386,6 +394,10 @@ class L_reverse extends L {
             this.style = ['1 / 1', '2 / 1', '3 / 1', '3 / 2']
             this.gridChanger(this.isRotate)
         } else if (this.isRotate == 90) {
+            if (this.elem.style.gridColumnEnd == 25) {
+                this.elem.style.gridColumnStart = '22'
+                this.elem.style.gridColumnEnd = '25'
+            }
             this.isRotate = 180
             this.style = ['1 / 1', '1 / 2', '1 / 3', '2 / 1']
             this.gridChanger(this.isRotate)
@@ -394,6 +406,10 @@ class L_reverse extends L {
             this.style = ['1 / 1', '1 / 2', '2 / 2', '3 / 2']
             this.gridChanger(this.isRotate)
         } else if (this.isRotate == 270) {
+            if (this.elem.style.gridColumnEnd == 25) {
+                this.elem.style.gridColumnStart = '22'
+                this.elem.style.gridColumnEnd = '25'
+            }
             this.isRotate = 0
             this.style = ['1 / 3', '2 / 1', '2 / 2', '2 / 3']
             this.gridChanger(this.isRotate)
@@ -502,6 +518,10 @@ class T extends L {
             this.style = ['1 / 1', '2 / 1', '2 / 2', '3 / 1']
             this.gridChanger(this.isRotate)
         } else if (this.isRotate == 90) {
+            if (this.elem.style.gridColumnEnd == 25) {
+                this.elem.style.gridColumnStart = '22'
+                this.elem.style.gridColumnEnd = '25'
+            }
             this.isRotate = 180
             this.style = ['1 / 1', '1 / 2', '1 / 3', '2 / 2']
             this.gridChanger(this.isRotate)
@@ -510,6 +530,10 @@ class T extends L {
             this.style = ['1 / 2', '2 / 1', '2 / 2', '3 / 2']
             this.gridChanger(this.isRotate)
         } else if (this.isRotate == 270) {
+            if (this.elem.style.gridColumnEnd == 25) {
+                this.elem.style.gridColumnStart = '22'
+                this.elem.style.gridColumnEnd = '25'
+            }
             this.isRotate = 0
             this.style = ['1 / 2', '2 / 1', '2 / 2', '2 / 3']
             this.gridChanger(this.isRotate)
@@ -610,6 +634,10 @@ class S extends T {
             this.style = ['1 / 1', '2 / 1', '2 / 2', '3 / 2']
             this.gridChanger(this.isRotate)
         } else {
+            if (this.elem.style.gridColumnEnd == 25) {
+                this.elem.style.gridColumnStart = '22'
+                this.elem.style.gridColumnEnd = '25'
+            }
             this.isRotate = 0
             this.style = ['1 / 2', '1 / 3', '2 / 1', '2 / 2']
             this.gridChanger(this.isRotate)
@@ -694,6 +722,10 @@ class S_reverse extends S {
             this.style = ['1 / 2', '2 / 1', '2 / 2', '3 / 1']
             this.gridChanger(this.isRotate)
         } else {
+            if (this.elem.style.gridColumnEnd == 25) {
+                this.elem.style.gridColumnStart = '22'
+                this.elem.style.gridColumnEnd = '25'
+            }
             this.isRotate = 0
             this.style = ['1 / 1', '1 / 2', '2 / 2', '2 / 3']
             this.gridChanger(this.isRotate)
@@ -737,7 +769,7 @@ let figures = [Figure, T, L, S, S_reverse, L_reverse]
 function init(index) {
     welcome.style.display = 'none'
     frame.style.filter = 'none'
-    // arr.unshift(new S_reverse())
+    //arr.unshift(new L())
     arr.unshift(new figures[Math.floor(Math.random() * figures.length)]())
     arr[index].isMove = true
     arr[index].createFigure()
@@ -814,13 +846,14 @@ function fullRowHandler() {
                     // translate cells after line removing
                     let translate = +a.style.transform.substr(11, a.style.transform.length - 14)
                     translate += +height
-                    a.style.transition = 'transform 500ms'
+                    a.style.transition = 'transform 1s'
                     a.style.transform = 'translateY(' + `${translate}` + 'px)'
                     row++
                     a.setAttribute('row', `${row}`)
                 }
             }
 
+// Change position of current blocks in matrix
             for (let b = matrix.indexOf(i); b > matrix.lastIndexOf(matrix[0]); b--) {
                 matrix[b] = matrix[b - 1]
             }

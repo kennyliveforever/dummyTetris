@@ -44,7 +44,9 @@
 }
 
 .panel {
-    position: relative;
+    /*position: relative;*/
+    display: flex;
+    flex-direction: column;
     width: 150px;
     height: 100%;
     background: aquamarine;
@@ -95,9 +97,11 @@
 
 .score {
     position: absolute;
+    align-self: center;
     height: 40px;
     top: 30px;
-    right: 20px;
+    /*right: 20px;*/
+    user-select: none;
 }
 
 .scoreDigit {
@@ -137,8 +141,10 @@
 
 .level {
     position: absolute;
-    right: 20px;
+    /*right: 20px;*/
     top: 150px;
+    align-self: center;
+    user-select: none;
 }
 
 .levelGhost {
@@ -164,10 +170,11 @@
 .pause {
     position: absolute;
     top: 350px;
-    right: 50px;
+    align-self: center;
     font-family: "Arial";
     font-size: 22px;
     opacity: 0.1;
+    user-select: none;
 }
 
 .restart {
@@ -179,6 +186,8 @@
     border-radius: 5px;
     padding: 5px;
     background: RGBA(0, 0, 0, 0.2);
+    align-self: center;
+    user-select: none;
 }
 
 .restart:hover {
@@ -256,13 +265,15 @@
     position: relative;
     align-self: center;
     display: flex;
-    justify-content: center;
-    align-items: end;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
     width: 50%;
     height: 80%;
     background: white;
     z-index: 5;
     border-radius: 15px;
+    flex-direction: column;
 }
 
 .start {
@@ -272,5 +283,69 @@
     background: cornflowerblue;
     padding: 10px;
     border-radius: 15px;
-    margin: 10px;
+    margin: 40px;
+    user-select: none;
+}
+
+.welcomeTitle {
+    margin-top: 60px;
+    font-size: 2em;
+}
+
+.toPause {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.toPauseImg {
+    background-image: url("/imges/arrow.png");
+    rotate: 90deg;
+    width: 36px;
+    height: 36px;
+    background-size: contain;
+    margin-left: 10px;
+}
+
+.toLeftImg {
+    background-image: url("/imges/arrow.png");
+    width: 36px;
+    height: 36px;
+    background-size: contain;
+    margin-left: 10px;
+}
+
+.toMoveLeft {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.toRotate {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.toRotateImg {
+    background-image: url("/imges/space.jpg");
+    width: 36px;
+    height: 36px;
+    background-size: contain;
+    margin-left: 10px;
+}
+
+.toMoveRight {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.toRightImg {
+    background-image: url("/imges/arrow.png");
+    rotate: 180deg;
+    width: 36px;
+    height: 36px;
+    background-size: contain;
+    margin-left: 10px;
 }
