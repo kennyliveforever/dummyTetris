@@ -49,7 +49,7 @@
     flex-direction: column;
     width: 150px;
     height: 100%;
-    background: aquamarine;
+    background: lightgrey;
     flex-grow: 1;
     border-left: solid black 2px;
 }
