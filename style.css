@@ -3,10 +3,14 @@
     src: url(fonts/DSEG7Classic-Italic.woff2);
 }
 
+body {
+    margin: 0;
+}
+
 .container {
     width: 100%;
     height: 100%;
-    background: aqua;
+    background-image: url(/imges/vector.jpg);
     display: flex;
     justify-content: center;
 }
@@ -16,8 +20,10 @@
     justify-content: center;
     position: relative;
     flex-grow: 0;
-    border: solid 2px black;
+    border: inset 12px;
+    border-color: rgb(120, 120, 120) rgb(0, 0, 0) rgb(0, 0, 0) rgb(120, 120, 120);
     background: lightgray;
+
     /*left: calc(50% - (538px + 10%)/2);*/
     /*height: calc( (22px * 40) + 4px);*/
     height: 96vh;
@@ -37,7 +43,7 @@
     width: calc(95vh / 1.5);
     background: lightgray;
     /*border-right: inset 2px black;*/
-    padding: 2px;
+    padding: 0px;
     overflow: hidden;
     height: 95vh;
     bottom: -0.5%;
@@ -344,6 +350,21 @@
 .toRightImg {
     background-image: url("/imges/arrow.png");
     rotate: 180deg;
+    width: 36px;
+    height: 36px;
+    background-size: contain;
+    margin-left: 10px;
+}
+
+.toMoveDown {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.toDownImg {
+    background-image: url("/imges/arrow.png");
+    rotate: 270deg;
     width: 36px;
     height: 36px;
     background-size: contain;

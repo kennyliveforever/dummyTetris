@@ -29,20 +29,6 @@ levelElement.textContent = level
 
 let frame = document.querySelector('.frame')
 
-if (window.getComputedStyle(gameOver).display == 'none') {
-    gameIsOver = false
-}
-
-let start = document.querySelector('.start')
-
-start.addEventListener('click', () => init(index))
-
-for (let i = 0; i < 864; i++) {
-    let div = document.createElement("div")
-    div.className = 'cell'
-    ghostGrid.append(div)
-}
-
 
 // Main parental class
 
@@ -676,16 +662,14 @@ class S extends T {
 }
 
 class S_reverse extends S {
-    //
+
     // [#][#]
     //    [#][#]
-    //
 
-    //
+
     //    [#]
     // [#][#]
     // [#]
-    //
 
     constructor() {
         super()
@@ -763,7 +747,25 @@ class S_reverse extends S {
     }
 }
 
+//--------------------------------------------------------------------
+
 let figures = [Figure, T, L, S, S_reverse, L_reverse]
+
+if (window.getComputedStyle(gameOver).display == 'none') {
+    gameIsOver = false
+}
+
+let start = document.querySelector('.start')
+
+start.addEventListener('click', () => init(index))
+
+for (let i = 0; i < 864; i++) {
+    let div = document.createElement("div")
+    div.className = 'cell'
+    ghostGrid.append(div)
+}
+
+//--------------------------------------------------------------------
 
 // Start game
 function init(index) {
@@ -787,6 +789,7 @@ function init(index) {
 }
 
 function handler(event) {
+
     if (event.code == 'ArrowLeft' && !pause) {
         arr[index].moveLeft()
     } else if (event.code == 'ArrowRight'  && !pause) {
@@ -903,7 +906,6 @@ function restart () {
         i.fill(0)
     }
 }
-
 
 
 // document.addEventListener("DOMContentLoaded",() => init(index))
